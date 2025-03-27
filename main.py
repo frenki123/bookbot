@@ -1,3 +1,4 @@
+import sys
 from stats import words_in_string, char_counter, sort_dict_by_val
 
 def get_book_text(filepath:str)->str:
@@ -20,12 +21,14 @@ def print_report(data:list[dict[str, str|int]], num:int):
     print("============= END ===============")
 
 
-def main():
-    text = get_book_text("./books/frankenstein.txt")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    path = sys.argv[1]
+    text = get_book_text(path)
     num = words_in_string(text)
     chars = char_counter(text)
     data = sort_dict_by_val(chars)
     print_report(data, num)
-
-if __name__ == "__main__":
-    main()
